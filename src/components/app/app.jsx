@@ -18,6 +18,8 @@ function App() {
       .catch(console.error);
   }
 
+  //console.log(pokemonData)
+
   return (
     <div className="App">
       <Header />

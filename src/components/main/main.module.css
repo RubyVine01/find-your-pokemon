@@ -1,8 +1,10 @@
 .main {
- width: 100vw;
- height: calc(100vh - 100px);
- background-color: beige;
- display: flex;
- align-items: center;
- justify-content: center;
+  width: 100vw;
+  height: calc(100vh - 100px);
+  background-color: beige;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  row-gap: 20px;
 }

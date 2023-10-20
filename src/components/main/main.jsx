@@ -5,7 +5,10 @@ export default function Main({ pokemonData, getPokemonData }) {
   return (
     <main className={styles.main}>
       <button onClick={getPokemonData}>chose</button>
-      <PokemonCard pokemonData={pokemonData} />
+      { (pokemonData !== null) ? <PokemonCard pokemonData={pokemonData} /> : <>
+     <span>↑</span>
+      <p>Click me</p></> }
+      
     </main>
   );
 }
