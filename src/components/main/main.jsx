@@ -1,19 +1,34 @@
 import PokemonCard from "../../pokemon-card/pokemon-card";
 import styles from "./main.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { request } from "../../units/api";
 
-export default function Main({ pokemonData, getPokemonData }) {
+export default function Main() {
+  const dispatch = useDispatch();
+  const newPokemon = useSelector((state) => state.pokemon);
+
+  const getPokemon = () => {
+    const pokemonId = Math.floor(Math.random() * 1017);
+    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
+    request(url)
+      .then((data) => {
+        dispatch({ type: "SET_POKEMON", data }); // Используйте dispatch
+      })
+      .catch(console.error);
+  };
+
   return (
     <main className={styles.main}>
-      {pokemonData !== null ? (
+      {newPokemon !== null ? (
         <>
-          <button className={styles.button} onClick={getPokemonData}>
+          <button className={styles.button} onClick={getPokemon}>
             try again
           </button>
-          <PokemonCard pokemonData={pokemonData} />
+          <PokemonCard newPokemon={newPokemon} />
         </>
       ) : (
         <>
-          <button className={styles.button} onClick={getPokemonData}>
+          <button className={styles.button} onClick={getPokemon}>
             find pokemon
           </button>
           <span className={styles.arrow}>↑</span>
