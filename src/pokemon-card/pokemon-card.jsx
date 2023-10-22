@@ -4,6 +4,7 @@ export default function PokemonCard({ pokemonData }) {
   return (
     <div className={styles.card}>
       <img
+        className={styles.image}
         src={pokemonData.sprites.other["official-artwork"].front_default}
         alt="Pokemon"
       />

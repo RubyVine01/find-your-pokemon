@@ -4,11 +4,17 @@ import styles from "./main.module.css";
 export default function Main({ pokemonData, getPokemonData }) {
   return (
     <main className={styles.main}>
-      <button onClick={getPokemonData}>chose</button>
-      { (pokemonData !== null) ? <PokemonCard pokemonData={pokemonData} /> : <>
-     <span>↑</span>
-      <p>Click me</p></> }
-      
+      <button className={styles.button} onClick={getPokemonData}>
+        find pokemon
+      </button>
+      {pokemonData !== null ? (
+        <PokemonCard pokemonData={pokemonData} />
+      ) : (
+        <>
+          <span className={styles.arrow}>↑</span>
+          <p className={styles.text}>click me</p>
+        </>
+      )}
     </main>
   );
 }
