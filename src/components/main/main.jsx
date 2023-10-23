@@ -6,6 +6,7 @@ import { request } from "../../units/api";
 export default function Main() {
   const dispatch = useDispatch();
   const newPokemon = useSelector((state) => state.pokemon);
+  const newBtnText = useSelector((state) => state.btnText);
 
   const getPokemon = () => {
     const pokemonId = Math.floor(Math.random() * 1017);
@@ -22,7 +23,7 @@ export default function Main() {
       {newPokemon !== null ? (
         <>
           <button className={styles.button} onClick={getPokemon}>
-            try again
+            {newBtnText}
           </button>
           <PokemonCard newPokemon={newPokemon} />
         </>
@@ -32,7 +33,7 @@ export default function Main() {
             find pokemon
           </button>
           <span className={styles.arrow}>↑</span>
-          <p className={styles.text}>click me</p>
+          <p className={styles.text}>{newBtnText}</p>
         </>
       )}
     </main>

@@ -9,16 +9,12 @@ import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const defaultState = { pokemon: null };
-
-
-
-
+const defaultState = { pokemon: null, btnText: "find pokemon" };
 
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case "SET_POKEMON":
-      return { ...state, pokemon: action.data };
+      return { ...state, pokemon: action.data, btnText: "try again" };
     default:
       return state;
   }
@@ -35,38 +31,3 @@ root.render(
 );
 
 reportWebVitals();
-
-
-// const reducer = (state = defaultState, action) => {
-//   switch (action.type) {
-//     case "GETPOKEMON":
-//       request(url)
-//       .then(data => {
-//         // Используйте действие для установки данных
-//         return { ...state, pokemon: data };
-//       })
-//       .catch(console.error);
-//     return state;
-//     default:
-//       return state;
-//   }
-// };
-
-
-// const reducer = (state = defaultState, action) => {
-//   switch (action.type) {
-//     case "GETPOKEMON":
-//       request(url)
-//         .then((data) => {
-//           // Используйте действие для установки данных
-//           store.dispatch({ type: "SET_POKEMON", data }); // Здесь предполагается, что у вас есть действие "SET_POKEMON"
-//         })
-//         .catch(console.error);
-//       return state; // Верните текущее состояние
-//     case "SET_POKEMON":
-//       return { ...state, pokemon: action.data };
-
-//     default:
-//       return state;
-//   }
-// };
