@@ -13,9 +13,13 @@ export default function Main() {
     const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
     request(url)
       .then((data) => {
-        dispatch({ type: "SET_POKEMON", data }); // Используйте dispatch
+        dispatch({ type: "SET_POKEMON", data });
       })
       .catch(console.error);
+
+    if (newPokemon === null) {
+      dispatch({ type: "RENAME_BTN", newBtnText: "try again" });
+    }
   };
 
   return (
