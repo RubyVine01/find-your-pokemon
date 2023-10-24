@@ -3,11 +3,12 @@ import styles from "./main.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { request } from "../../units/api";
 import { renameBtnAction, setPokemonAction } from "../../services/actions/pokemon-actions";
+import { btnTextSelector, pokemonDataSelector } from "../../services/selectors/pokemon-selectors";
 
 export default function Main() {
   const dispatch = useDispatch();
-  const newPokemon = useSelector((state) => state.pokemon);
-  const newBtnText = useSelector((state) => state.btnText);
+  const newPokemon = useSelector(pokemonDataSelector);
+  const newBtnText = useSelector(btnTextSelector);
 
   const getPokemon = () => {
     const pokemonId = Math.floor(Math.random() * 1017);

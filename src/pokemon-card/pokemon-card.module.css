@@ -28,3 +28,11 @@
 .info {
   width: 200px;
 }
+
+.greenText {
+  color: rgb(10, 101, 10)
+}
+
+.redText {
+  color: rgb(99, 10, 10);
+}
