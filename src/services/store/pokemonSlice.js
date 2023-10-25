@@ -5,6 +5,7 @@ const initialState = {
   btnText: "find pokemon",
   changed: new Date(),
   helpText: "click me",
+  countClick: 0,
 };
 
 export const pokemonSlice = createSlice({
@@ -21,8 +22,12 @@ export const pokemonSlice = createSlice({
     setHelpText: (state, action) => {
       state.helpText = action.payload;
     },
+    addCountClick: (state, action) => {
+      state.countClick += action.payload;
+    },
   },
 });
 
-export const { setPokemon, renameBtn, setHelpText } = pokemonSlice.actions;
+export const { setPokemon, renameBtn, setHelpText, addCountClick } =
+  pokemonSlice.actions;
 export default pokemonSlice.reducer;

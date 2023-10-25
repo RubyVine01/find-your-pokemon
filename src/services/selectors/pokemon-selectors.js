@@ -5,4 +5,5 @@ export const nameLengthSelector = (store) => {
   return nameLength;
 };
 
-export const helpTextelector = (store) => store.pokemon.helpText;
+export const helpTextSelector = (store) => store.pokemon.helpText;
+export const countClickSelector = (store) => store.pokemon.countClick;

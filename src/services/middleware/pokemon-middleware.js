@@ -1,17 +1,13 @@
-
+import { setHelpText } from "../store/pokemonSlice";
 
 export const pokemonMiddleware = () => {
   return (store) => {
     return (next) => (action) => {
-      //   console.log(store.getState());
-      //   console.log(next);
-      //   console.log(action);
       console.log(store.getState().pokemon);
 
-    //   if (store.getState().pokemon === "error") {
-        
-    //     store.dispatch(setHelpTextAction("Oops, there's been an error. Try again."));
-    //   }
+      if (store.getState().pokemon.countClick >= 10 && action.type === 'pokemon/setPokemon') {
+        return 
+      }
 
       return next(action);
     };
