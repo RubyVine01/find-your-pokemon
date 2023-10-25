@@ -1,4 +1,4 @@
-import { RENAME_BTN, SET_POKEMON } from "../reducers/pokemon-reducer";
+import { RENAME_BTN, SET_HELP_TEXT, SET_POKEMON } from "../reducers/pokemon-reducer";
 
 function setPokemonAction(payload) {
   const action = {
@@ -15,11 +15,20 @@ function renameBtnAction(payload) {
   const action = {
     type: RENAME_BTN,
     payload: {
-      btnText: payload,
-      time: new Date(),
+      btnText: payload
     },
   };
   return action;
 }
 
-export { setPokemonAction, renameBtnAction };
+function setHelpTextAction(payload) {
+  const action = {
+    type: SET_HELP_TEXT,
+    payload: {
+      helpText: payload
+    },
+  };
+  return action;
+}
+
+export { setPokemonAction, renameBtnAction, setHelpTextAction };
