@@ -23,6 +23,7 @@
   background-color: rgb(7, 91, 40);
   color: white;
 }
+
 .arrow {
   margin: 0;
   font-size: 30px;
@@ -38,4 +39,10 @@
   font-weight: 400;
   line-height: 20px;
   color: rgb(0, 0, 0);
+}
+
+
+
+@media screen and (max-width: 650px) {
+
 }
