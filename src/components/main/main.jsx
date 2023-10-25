@@ -3,40 +3,40 @@ import styles from "./main.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { request } from "../../units/api";
 import {
-  renameBtnAction,
-  setPokemonAction,
-  setHelpTextAction
-} from "../../services/actions/pokemon-actions";
-import {
   btnTextSelector,
   pokemonDataSelector,
   helpTextelector,
 } from "../../services/selectors/pokemon-selectors";
+import {
+  renameBtn,
+  setHelpText,
+  setPokemon,
+} from "../../services/store/pokemonSlice";
 
 export default function Main() {
   const dispatch = useDispatch();
   const newPokemon = useSelector(pokemonDataSelector);
   const newBtnText = useSelector(btnTextSelector);
-
   const helpText = useSelector(helpTextelector);
 
+  console.log(newPokemon);
+  
   const getPokemon = () => {
-    // const pokemonId = Math.floor(Math.random() * 1017);
-    const pokemonId = Math.floor(Math.random() * 1200);
+    const pokemonId = Math.floor(Math.random() * 1500);
 
     const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
     request(url)
       .then((data) => {
-        dispatch(setPokemonAction(data));
+        dispatch(setPokemon(data));
       })
       .catch((error) => {
-        console.error(error); // Вывести ошибку в консоль
-        dispatch(setPokemonAction("error")); // Записать "error" в диспатч
-        dispatch(setHelpTextAction("Oops, there's been an error. Try again."));
+        console.error(error);
+        dispatch(setPokemon("error"));
+        dispatch(setHelpText("Oops, there's been an error. Try again."));
       });
 
-    if (newPokemon === null) {
-      dispatch(renameBtnAction("try again"));
+    if (!newPokemon === null) {
+      dispatch(renameBtn("try again"));
     }
   };
 
@@ -52,7 +52,7 @@ export default function Main() {
       ) : (
         <>
           <button className={styles.button} onClick={getPokemon}>
-          {newBtnText}
+            {newBtnText}
           </button>
           <span className={styles.arrow}>↑</span>
           <p className={styles.text}>{helpText}</p>
@@ -61,14 +61,3 @@ export default function Main() {
     </main>
   );
 }
-
-// newPokemon === "error" ? (
-//   <>
-//     <button className={styles.button} onClick={getPokemon}>
-//       try again
-//     </button>
-//     <span className={styles.arrow}>↑</span>
-//     <p className={styles.text}>Oops, there's been an error. Try again.</p>
-//   </>
-// )
-// :

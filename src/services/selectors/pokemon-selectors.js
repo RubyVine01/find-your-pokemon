@@ -1,8 +1,8 @@
-export const pokemonDataSelector = (state) => state.pokemon;
-export const btnTextSelector = (state) => state.btnText;
-export const nameLengthSelector = (state) => {
-  const nameLength = state.pokemon.name.length;
+export const pokemonDataSelector = (store) => store.pokemon.pokemon;
+export const btnTextSelector = (store) => store.pokemon.btnText;
+export const nameLengthSelector = (store) => {
+  const nameLength = store.pokemon.pokemon.name.length;
   return nameLength;
 };
 
-export const helpTextelector = (state) => state.helpText;
+export const helpTextelector = (store) => store.pokemon.helpText;
