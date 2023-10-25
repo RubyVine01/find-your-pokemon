@@ -22,7 +22,7 @@ export default function Main() {
 
   const getPokemon = () => {
     // const pokemonId = Math.floor(Math.random() * 1017);
-    const pokemonId = Math.floor(Math.random() * 3000);
+    const pokemonId = Math.floor(Math.random() * 1200);
 
     const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
     request(url)
