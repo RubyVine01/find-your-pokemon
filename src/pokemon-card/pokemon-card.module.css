@@ -34,14 +34,6 @@
   width: 200px;
 }
 
-.greenText {
-  color: rgb(10, 101, 10);
-}
-
-.redText {
-  color: rgb(99, 10, 10);
-}
-
 @media screen and (max-width: 650px) {
   .card {
     flex-direction: column;
@@ -58,7 +50,6 @@
   }
 
   .list {
-
     font-size: 18px;
     font-weight: 400;
     line-height: 20px;

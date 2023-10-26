@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  pokemon: null,
   btnText: "find pokemon",
-  changed: new Date(),
   helpText: "click me",
   countClick: 0,
 };
@@ -12,10 +10,6 @@ export const pokemonSlice = createSlice({
   name: "pokemon",
   initialState,
   reducers: {
-    setPokemon: (state, action) => {
-      state.pokemon = action.payload;
-      state.changed = action.payload;
-    },
     renameBtn: (state, action) => {
       state.btnText = action.payload;
     },
@@ -28,6 +22,6 @@ export const pokemonSlice = createSlice({
   },
 });
 
-export const { setPokemon, renameBtn, setHelpText, addCountClick } =
+export const { renameBtn, setHelpText, addCountClick } =
   pokemonSlice.actions;
 export default pokemonSlice.reducer;

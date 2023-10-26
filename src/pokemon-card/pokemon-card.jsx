@@ -1,25 +1,10 @@
-import { useSelector } from "react-redux";
-import { nameLengthSelector } from "../services/selectors/pokemon-selectors";
-
 import styles from "./pokemon-card.module.css";
 
 export default function PokemonCard({ newPokemon }) {
-  const nameLength = useSelector(nameLengthSelector);
-
   return (
     <div className={styles.card}>
       <div className={styles.info}>
-        <h2
-          className={
-            nameLength > 8
-              ? `${styles.name} ${styles.greenText}`
-              : nameLength > 7
-              ? `${styles.name} ${styles.redText}`
-              : styles.name
-          }
-        >
-          {newPokemon.name}
-        </h2>
+        <h2 className={styles.name}>{newPokemon.name}</h2>
         <ul className={styles.list}>
           {newPokemon.stats.map((entry) => (
             <li key={entry.stat.name}>
