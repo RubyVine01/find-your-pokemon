@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { pokemonDataThunk } from "../middleware/pokemonDataThunk";
 
 const initialState = {
   pokemonData: null,
@@ -10,16 +11,18 @@ const pokemonDataSlice = createSlice({
   name: "pokemonData",
   initialState,
   reducers: {
-    pokemonDataLoading: (state) => {
-      state.isloading = true;
-      state.error = "";
-    },
-    pokemonDataLoaded: (state, action) => {
+  },
+  extraReducers: {
+    [pokemonDataThunk.fulfilled.type]: (state, action) => {
       state.pokemonData = action.payload;
       state.isloading = false;
       state.error = "";
     },
-    pokemonDataErrorLoad: (state, action) => {
+    [pokemonDataThunk.pending.type]: (state) => {
+      state.isloading = true;
+      state.error = "";
+    },
+    [pokemonDataThunk.rejected.type]: (state, action) => {
       state.isloading = false;
       state.error = action.payload;
     },
@@ -29,3 +32,18 @@ const pokemonDataSlice = createSlice({
 export const { pokemonDataLoading, pokemonDataLoaded, pokemonDataErrorLoad } =
   pokemonDataSlice.actions;
 export default pokemonDataSlice.reducer;
+
+
+// pokemonDataLoading: (state) => {
+    //   state.isloading = true;
+    //   state.error = "";
+    // },
+    // pokemonDataLoaded: (state, action) => {
+    //   state.pokemonData = action.payload;
+    //   state.isloading = false;
+    //   state.error = "";
+    // },
+    // pokemonDataErrorLoad: (state, action) => {
+    //   state.isloading = false;
+    //   state.error = action.payload;
+    // },

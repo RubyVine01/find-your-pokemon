@@ -1,7 +1,6 @@
 import PokemonCard from "../../pokemon-card/pokemon-card";
 import styles from "./main.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { request } from "../../units/api";
 import {
   btnTextSelector,
   helpTextSelector,
@@ -21,6 +20,8 @@ import {
   isloadingSelector,
   pokemonDataSelector,
 } from "../../services/selectors/pokemon-data-selectors";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { pokemonDataThunk } from "../../services/middleware/pokemonDataThunk";
 
 export default function Main() {
   const dispatch = useDispatch();
@@ -29,38 +30,23 @@ export default function Main() {
   const helpText = useSelector(helpTextSelector);
   const countClick = useSelector(countClickSelector);
 
-  // const getPokemon = () => {
-  //   const pokemonId = Math.floor(Math.random() * 1200);
-  //   const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
-  //   request(url)
-  //     .then((data) => {
-  //       dispatch(setPokemon(data));
-  //       dispatch(renameBtn("try again"));
-  //       dispatch(addCountClick(1));
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //       dispatch(setPokemon("error"));
-  //       dispatch(setHelpText("Oops, there's been an error. Try again."));
-  //       dispatch(renameBtn("try again"));
-  //     });
-  // };
 
-  const getPokemonData = async () => {
-    dispatch(pokemonDataLoading());
-    const pokemonId = Math.floor(Math.random() * 1000);
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
-    const data = await res.json();
-    dispatch(pokemonDataLoaded(data));
-    dispatch(renameBtn("try again"));
-    dispatch(addCountClick(1));
-  };
 
   const isLoading = useSelector(isloadingSelector);
-  console.log(isLoading);
-  // useEffect(() => {
-  //   getPokemonData();
-  // }, []);
+
+
+  const handleGetPokemonData = () => {
+    dispatch(pokemonDataThunk())
+      .then((result) => {
+        if (pokemonDataThunk.fulfilled.match(result)) {
+          dispatch(renameBtn("try again"));
+          dispatch(addCountClick(1));
+        } else if (pokemonDataThunk.rejected.match(result)) {
+          // Обработка ошибки, если необходимо
+        }
+      });
+  };
+
 
   return (
     <main className={styles.main}>
@@ -71,7 +57,7 @@ export default function Main() {
               <button
                 disabled
                 className={`${styles.button} ${styles.button_disable} `}
-                onClick={getPokemonData}
+                onClick={handleGetPokemonData}
               >
                 {newBtnText}
               </button>
@@ -80,7 +66,7 @@ export default function Main() {
             </>
           ) : (
             <>
-              <button className={styles.button} onClick={getPokemonData}>
+              <button className={styles.button} onClick={handleGetPokemonData}>
                 {newBtnText}
               </button>
               <p className={styles.text}>Number of attempts: {countClick}/10</p>
@@ -90,14 +76,14 @@ export default function Main() {
             </>
           )}
           {isLoading ? (
-           <p className={styles.text}>Pokemon data is loading ...</p>
+            <p className={styles.text}>Pokemon data is loading ...</p>
           ) : (
             <PokemonCard newPokemon={newPokemon} />
           )}
         </>
       ) : (
         <>
-          <button className={styles.button} onClick={getPokemonData}>
+          <button className={styles.button} onClick={handleGetPokemonData}>
             {newBtnText}
           </button>
           <span className={styles.arrow}>↑</span>
